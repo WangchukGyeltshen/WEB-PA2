@@ -1,6 +1,7 @@
 import ChatList from '@/components/ui/ChatList';
 import CameraBox from '@/components/ui/CameraBox';
 import Image from 'next/image';
+import { FiUserPlus, FiSettings } from 'react-icons/fi'; // ✅ Add settings icon
 
 export default function Home() {
   return (
@@ -10,19 +11,15 @@ export default function Home() {
 
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <Image
-            src="/Screenshot 2025-04-19 at 6.09.10 PM.png"
-            alt="Bitmoji"
-            width={44}
-            height={44}
-            className="rounded-full"
-          />
-          <div className="relative">
-            <Image src="/Screenshot 2025-04-19 at 6.09.20 PM.png" alt="Snapchat" width={26} height={26} />
-            <span className="absolute -top-1 -right-1 bg-blue-500 text-[10px] leading-none w-5 h-5 rounded-full flex items-center justify-center">
-              1
-            </span>
-          </div>
+          {/* ⚙️ Replace avatar with settings icon button */}
+          <button className="bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white p-2 rounded-full transition duration-200">
+            <FiSettings size={20} />
+          </button>
+
+          {/* Friend Add Button stays */}
+          <button className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full transition-all duration-200 shadow">
+            <FiUserPlus size={20} />
+          </button>
         </div>
 
         {/* Search */}
@@ -41,8 +38,8 @@ export default function Home() {
         <CameraBox />
       </main>
 
-      {/* Bitmoji Full */}
-      <aside className="w-1/4 bg-[#1a1a1a] flex items-center justify-center p-5">
+      {/* Right Panel */}
+      <aside className="w-1/4 bg-[#2a2a2a] flex items-center justify-center p-5">
         <Image src="/avatar.png" alt="Bitmoji Full" width={320} height={520} />
       </aside>
     </div>

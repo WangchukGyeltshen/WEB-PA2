@@ -2,54 +2,55 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaSnapchatGhost } from 'react-icons/fa';
+import {
+  Star,
+  PlayCircle,
+  MessageCircle,
+  Camera,
+  Sparkles,
+  BookOpen,
+} from 'lucide-react';
 
 export default function Navbar() {
-  const pathname = usePathname(); // Detect the current page
+  const pathname = usePathname();
 
-  // Update the active link logic
-  const linkClasses = (path) => {
-    if (path === '/spotlight') {
-      return (pathname === '/' || pathname === '/spotlight')
-        ? "font-bold border-b-2 border-black"
-        : "hover:underline";
-    }
-    return pathname === path
-      ? "font-bold border-b-2 border-black"
-      : "hover:underline";
-  };
+  const navItems = [
+    { name: 'Stories', icon: <BookOpen size={20} />, href: '/stories' },
+    { name: 'Spotlight', icon: <PlayCircle size={20} />, href: '/spotlight' },
+    { name: 'Chats', icon: <MessageCircle size={20} />, href: '/chats' },
+    { name: 'Lenses', icon: <Camera size={20} />, href: '/lenses' },
+    { name: 'Snapchat+', icon: <Sparkles size={20} />, href: '/snapchatplus' },
+  ];
 
   return (
-    <nav className="flex justify-between items-center p-4 border-b shadow-sm bg-white">
-      <div className="flex items-center space-x-4">
-        <FaSnapchatGhost size={32} />
-        <input
-          type="text"
-          placeholder="Search"
-          className="border rounded-full px-4 py-1"
-        />
+    <nav className="bg-white shadow px-6 py-3 flex justify-between items-center sticky top-0 z-50 border-b">
+      {/* Logo */}
+      <div className="text-2xl font-bold text-yellow-400">Snapchat</div>
+
+      {/* Navigation links */}
+      <div className="flex space-x-6">
+        {navItems.map((item) => {
+          const isActive =
+            pathname === item.href || (item.name === 'Spotlight' && pathname === '/');
+          return (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`flex items-center space-x-1 text-sm font-medium transition-colors ${
+                isActive ? 'text-yellow-500' : 'text-gray-700 hover:text-yellow-400'
+              }`}
+            >
+              {item.icon}
+              <span>{item.name}</span>
+            </Link>
+          );
+        })}
       </div>
 
-      <div className="flex items-center space-x-6">
-        <Link href="/stories" className={linkClasses('/stories')}>
-          Stories
-        </Link>
-        <Link href="/spotlight" className={linkClasses('/spotlight')}>
-          Spotlight
-        </Link>
-        <Link href="/chat" className={linkClasses('/chat')}>
-          Chat
-        </Link>
-        <Link href="/lenses" className={linkClasses('/lenses')}>
-          Lenses
-        </Link>
-        <Link href="/snapchat-plus" className={linkClasses('/snapchat-plus')}>
-          Snapchat+
-        </Link>
-        <button className="bg-black text-white px-4 py-2 rounded-md">
-          Download
-        </button>
-      </div>
+      {/* Right side: Login or profile */}
+      <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1 rounded-md">
+        Log In
+      </button>
     </nav>
   );
 }

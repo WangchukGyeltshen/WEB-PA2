@@ -3,6 +3,8 @@
 import LoginForm from '@/components/ui/LoginForm';
 import SnapInfo from '@/components/ui/SnapInfo';
 import VideoCard from '@/components/ui/VideoCard';
+import Navbar from '@/components/ui/Navbar';
+
 
 const videos = [
   { src: '/videos/video1.mp4', username: 'Pema Dorji' },
@@ -13,14 +15,18 @@ const videos = [
 export default function HomePage() {
   return (
     <main className="bg-white min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6 h-screen">
+      {/* Navbar goes here */}
+      <Navbar />
+
+      {/* 3-column grid layout */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6 h-[calc(100vh-4rem)]">
         
-        {/* Left side - Login Form */}
+        {/* Left - Login */}
         <div className="overflow-hidden">
           <LoginForm />
         </div>
 
-        {/* Middle - Spotlight Videos (scrolling video by video) */}
+        {/* Center - Spotlight Videos */}
         <div className="overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar flex flex-col items-center h-full">
           {videos.map((video, index) => (
             <div key={index} className="snap-center flex justify-center py-6">
@@ -29,7 +35,7 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* Right side - Snap Info */}
+        {/* Right - Info */}
         <div className="overflow-hidden">
           <SnapInfo />
         </div>

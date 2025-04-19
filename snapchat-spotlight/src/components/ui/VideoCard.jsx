@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import { FaHeart, FaCommentDots, FaShare } from 'react-icons/fa';
 
 export default function VideoCard({ video }) {
   const videoRef = useRef(null);
@@ -31,41 +32,44 @@ export default function VideoCard({ video }) {
   }, []);
 
   return (
-    <div className="relative h-screen w-full flex items-center justify-center snap-center overflow-hidden">
-      {/* The Video */}
-      <video
-        ref={videoRef}
-        src={video.src}
-        muted
-        loop
-        playsInline
-        className="object-cover w-full h-full"
-      />
+    <div className="flex flex-col items-center">
+      <div className="overflow-hidden rounded-xl shadow-md w-[300px] h-[500px] relative bg-black">
+        <video
+          ref={videoRef}
+          src={video.src}
+          muted
+          loop
+          playsInline
+          className="object-cover w-full h-full"
+        />
 
-      {/* Overlay content */}
-      <div className="absolute inset-0 flex flex-col justify-between p-5">
-        
-        {/* Username at bottom left */}
-        <div className="flex justify-between items-end h-full">
-          <div className="text-white">
-            <h2 className="text-xl font-bold">@{video.username}</h2>
+        {/* Floating Buttons */}
+        <div className="absolute right-2 bottom-16 flex flex-col items-center gap-5 text-white">
+          <div className="flex flex-col items-center">
+            <button className="bg-white text-black p-3 rounded-full shadow-md hover:scale-110 transition-transform">
+              <FaHeart size={20} />
+            </button>
+            <span className="text-xs mt-1">2.1k</span>
           </div>
 
-          {/* Buttons on right */}
-          <div className="flex flex-col items-center gap-5 mr-3 mb-10">
-            <button className="bg-white p-3 rounded-full shadow-md hover:scale-110 transition-transform">
-              ❤️
+          <div className="flex flex-col items-center">
+            <button className="bg-white text-black p-3 rounded-full shadow-md hover:scale-110 transition-transform">
+              <FaCommentDots size={20} />
             </button>
-            <button className="bg-white p-3 rounded-full shadow-md hover:scale-110 transition-transform">
-              💬
+            <span className="text-xs mt-1">324</span>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <button className="bg-white text-black p-3 rounded-full shadow-md hover:scale-110 transition-transform">
+              <FaShare size={20} />
             </button>
-            <button className="bg-white p-3 rounded-full shadow-md hover:scale-110 transition-transform">
-              ➡️
-            </button>
+            <span className="text-xs mt-1">Share</span>
           </div>
         </div>
-
       </div>
+
+      {/* Username below video */}
+      <h2 className="font-bold mt-2">@{video.username}</h2>
     </div>
   );
 }
